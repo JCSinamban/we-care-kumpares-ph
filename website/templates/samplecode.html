@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Show/Hide div when select dropdown option</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+        body{
+            font-family: 'Poppins', sans-serif;
+        }
+        .wrapper{
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 70px 0;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .menu,
+        .content{
+           width: 100%; 
+        }
+        select{
+           padding: 15px;
+           font-size: 16px;
+           font-weight: 700;
+           font-family: 'Poppins', sans-serif;
+           border: none;
+           border-radius: 8px;
+           border: 2px solid #3f51b5;
+           box-shadow: 0 15px 15px #efefef;
+           appearance: none;
+        }
+        .content{
+            margin: 30px 0;
+        }
+        .content .data{
+            padding: 25px;
+            background-color: #fff;
+            border: 2px solid #8bc34a;
+            border-radius: 8px;
+        }
+        .content p{
+            margin-bottom: 15px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid gainsboro;
+        }
+        .content p:last-child{
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .content p b{
+            font-weight: 700;
+        }
+        .content p span{
+            float: right;
+            font-weight: normal;
+        }
+        image{
+            text-align: center;
+        }
+        .data{
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="menu">
+            <select id="name">
+                <option value="nia">Nia Matos</option>
+                <option value="anita">Anita Cruz</option>
+                <option value="reina">Reina Brooks</option>
+                <option value="britney">Britney Cooper</option>
+                <option value="aliah">Aliah Pitts</option>
+                <option value="reyna">Reyna Chung</option>
+            </select>
+        </div>
+
+
+<div class="content">
+    <div id="nia" class="data">
+        <p><b>Full Name</b><span>Nia Matos</span></p>
+        <p><b>Email</b><span>niamatos@gmail.com</span></p>
+        <p><b>Phone</b><span>09123456789</span></p>
+        <p><b>Twitter</b><span>@niamatos</span></p>
+        <p><b>Address</b><span>4021 Biddi Lane, Naples FL</span></p>
+        <p><b>Website</b><span>www.niamatos.com</span></p>
+    </div>
+
+    <div id="anita" class="data">
+        <p><b>Full Name</b><span>Anita Cruz</span></p>
+        <p><b>Email</b><span>anitacruz@gmail.com</span></p>
+        <p><b>Phone</b><span>09123456789</span></p>
+        <p><b>Twitter</b><span>@anitacruz</span></p>
+        <p><b>Address</b><span>4021 Biddi Lane, Naples FL</span></p>
+        <p><b>Website</b><span>www.anitacruz.com</span></p>
+    </div>
+
+    <div id="reina" class="data">
+        <p><b>Full Name</b><span>Reina Brooks</span></p>
+        <p><b>Email</b><span>reinabrooks@gmail.com</span></p>
+        <p><b>Phone</b><span>09123456789</span></p>
+        <p><b>Twitter</b><span>@reinabrooks</span></p>
+        <p><b>Address</b><span>4021 Biddi Lane, Naples FL</span></p>
+        <p><b>Website</b><span>www.reinabrooks.com</span></p>
+    </div>
+
+    <div id="britney" class="data">
+        <p><b>Full Name</b><span>Britney Cooper</span></p>
+        <p><b>Email</b><span>britneycooper@gmail.com</span></p>
+        <p><b>Phone</b><span>09123456789</span></p>
+        <p><b>Twitter</b><span>@britneycooper</span></p>
+        <p><b>Address</b><span>4021 Biddi Lane, Naples FL</span></p>
+        <p><b>Website</b><span>www.britneycooper.com</span></p>
+    </div>
+
+    <div id="aliah" class="data">
+        <p><b>Full Name</b><span>Aliah Pitts</span></p>
+        <p><b>Email</b><span>aliahpitts@gmail.com</span></p>
+        <p><b>Phone</b><span>09123456789</span></p>
+        <p><b>Twitter</b><span>@aliahpitts</span></p>
+        <p><b>Address</b><span>4021 Biddi Lane, Naples FL</span></p>
+        <p><b>Website</b><span>www.aliahpitts.com</span></p>
+    </div>
+
+    <div id="reyna" class="data">
+        <p class="image"><img src="https://randomuser.me/api/portraits/men/1.jpg" alt=""></p>
+        <p><b>Full Name</b><span>Reyna Chung</span></p>
+        <p><b>Email</b><span>reynachung@gmail.com</span></p>
+        <p><b>Phone</b><span>09123456789</span></p>
+        <p><b>Twitter</b><span>@reynachung</span></p>
+        <p><b>Address</b><span>4021 Biddi Lane, Naples FL</span></p>
+        <p><b>Website</b><span>www.reynachung.com</span></p>
+    </div>
+</div>
+
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $("#name").on('change', function(){
+            $(".data").hide();
+            $("#" + $(this).val()).fadeIn(700);
+        }).change();
+    });
+</script>
+
+</body>
+</html>

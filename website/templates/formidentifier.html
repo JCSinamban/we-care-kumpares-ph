@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <link rel="icon" href="assets/logo.png">
+      <title>Kumpares PH Website</title>
+      <link rel="stylesheet" href="static/formidentifier.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+   </head>
+   <body>
+    
+    <div class="container">
+        <form id="Form1">
+         <h3>Customer Feedback Form</h3>
+         
+         <div class="wrapper">
+            <div class="menu">
+               <label for="transaction">Type of Transaction:</label>
+               <br>
+               <select id="transaction" >
+                  <option value="" disabled selected hidden>Select type of transaction..</option>
+                  <option value="dinein">Dine-in</option>
+                  <option value="takeout">Take-out</option>
+                  <option value="delivery">Delivery</option>
+               </select>
+            </div>
+         </div>
+
+            <div class="wrapper">
+               <div class="menu">
+                  <br>
+                  <label for="feedback">Type of Feedback:</label>
+                  <br>
+                  <select id="feedback" required>
+                     <option value="" disabled selected hidden>Choose feedback to submit...</option>
+                     <option value="products">Products</option>
+                     <option value="services">Services</option>
+                     <option value="prodserv">Products and Services</option>
+                  </select>
+               </div>
+            </div>
+
+            <div class="wrapper">
+               <div class="menu">
+                  <br>
+                  <label for="feedback">Data Privacy:</label>
+                  <div class="scroll-bg">
+                     <div class="scroll-div">
+                        <div class="scroll-object">
+                           In compliance with the Republic Act 10173, also known as the Data Privacy Act of 2012, Kumpares Lechon Manok Muntinlupa and San Pedro promises that no personal data will be disclosed to anyone outside the organization without your consent. All information inputed will be used ONLY for sole purpose of tracking the preformance of the business and identify the things that we need to improve to satisfy our valued customers.
+                           <br>
+                           <br><br>
+                           <div class="checkbox"><input type="checkbox" id="checkbox" name="checkbox" value="Accept">
+                           <label for="checkbox"> I agree</label></div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+    
+         <div class="btn-box">
+            <button type="button" id="Next">Next</button>
+         </div>
+       </form>
+    
+
+    
+
+      <div class="step-row">
+         <div id="progress"></div>
+         <div class="step-col"><small>Form Identifier</small></div>
+      </div>
+     </div>
+
+<!--     <script>
+      var Form1 = document.getElementById("Form1");
+      var Next = document.getElementById("Next");
+      var feedback = document.getElementById("feedback");
+      
+
+
+      Next.onclick = function() {
+         if (feedback == "products"){
+            window.location.href='/prodform';
+         }
+         else if (feedback == "services"){
+            window.location.href='/servform';
+         }
+         else if (feedback == "prodserv"){
+            window.location.href='/prodservform';
+         }
+      }
+     </script>
+     -->
+<script>
+     window.onload = function () {
+      function websiteBeoordelen () {
+          var feedback = document.getElementById("feedback").value;
+          if (feedback == "products") {
+              document.getElementById('Next').onclick = function() {
+                  location.href = "/prodform";
+              }
+          }
+          else if (feedback == "services") {
+              document.getElementById('Next').onclick = function() {
+                  location.href = "/servform";
+              }
+          }
+          else if (feedback == "prodserv") {
+              document.getElementById('Next').onclick = function() {
+                  location.href = "/prodservform";
+              }
+          }
+          else {
+              document.write("The code is wrong, try again!");
+          }
+        return false;   
+      }
+     document.getElementById('Next').onclick = websiteBeoordelen;
+  };
+</script>
+
+   </body>
+</html>

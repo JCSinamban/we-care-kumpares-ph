@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <link rel="icon" href="static/assets/logo.png">
+      <title>Kumpares PH Website</title>
+      <link rel="stylesheet" href="static/form.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+   </head>
+   <body>
+     <div class="container">
+        <form id="Form1">
+            <h3>Customer Feedback Form</h3>
+            <input type="text" placeholder="Name" required>
+            <input type="text" placeholder="Contact Number" required>
+            <input type="text" placeholder="Email Address" required>
+       
+            <div class="btn-box">
+               <button type="button" id="Next1">Next</button>
+            </div>
+        </form>
+
+        <form id="Form2">
+         <h3>Customer Feedback Form</h3>
+         
+         <div class="wrapper">
+            <div class="menu">
+               <label for="transaction">Type of Transaction:</label>
+               <br>
+               <select id="dropdown">
+                  <option value="dinein">Dine-in</option>
+                  <option value="takeout">Take-out</option>
+                  <option value="delivery">Delivery</option>
+               </select>
+            </div>
+         </div>
+
+            <div class="wrapper">
+               <div class="menu">
+                  <br>
+                  <label for="feedback">Type of Feedback:</label>
+                  <br>
+                  <select id="dropdown">
+                     <option value="products">Products</option>
+                     <option value="services">Services</option>
+                     <option value="prodserv">Products and Services</option>
+                  </select>
+               </div>
+            </div>
+    
+         <div class="btn-box">
+            <button type="button" id="Back1">Back</button>
+            <button type="button" id="Next2">Next</button>
+         </div>
+       </form>
+
+     <form id="Form3">
+      <h3>Customer Feedback Form</h3>
+      <input type="text" placeholder="Name" required>
+      <input type="text" placeholder="Contact Number" required>
+      <input type="text" placeholder="Email Address" required>
+ 
+      <div class="btn-box">
+         <button type="button" id="Back2">Back</button>
+         <button type="button">Submit</button>
+      </div>
+  </form>   
+
+      <div class="step-row">
+         <div id="progress"></div>
+
+         <div class="step-col"><small>Step 1</small></div>
+         <div class="step-col"><small>Step 2</small></div>
+         <div class="step-col"><small>Step 3</small></div>
+      </div>
+
+     </div>
+      <script src="static/form.js"></script>
+      <script>
+         var Form1 = document.getElementById("Form1");
+         var Form2 = document.getElementById("Form2");
+         var Form3 = document.getElementById("Form3");
+
+         var Next1 = document.getElementById("Next1");
+         var Next2 = document.getElementById("Next2");
+         var Back1 = document.getElementById("Back1");
+         var Back2 = document.getElementById("Back2");
+
+         var progress = document.getElementById("progress");
+
+         Next1.onclick = function() {
+            Form1.style.left = "-450px";
+            Form2.style.left = "40px"; 
+            progress.style.width = "240px";
+         }
+
+         Back1.onclick = function() {
+            Form1.style.left = "40px";
+            Form2.style.left = "450px"; 
+            progress.style.width = "120px";
+         }
+
+         Next2.onclick = function() {
+            Form2.style.left = "-450px";
+            Form3.style.left = "40px"; 
+            progress.style.width = "360px";
+         }
+
+         Back2.onclick = function() {
+            Form2.style.left = "40px";
+            Form3.style.left = "450px"; 
+            progress.style.width = "240px";
+         }
+
+      </script>
+   </body>
+</html>

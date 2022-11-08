@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kumpares PH Admin Website</title>
+<link rel="icon" href="static/assets/logo.png">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="static/admin.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/static/filter.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="/admin">
+                        <span class="icon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                        <span class="title"><h3>Administrator</h3></span>
+                    </a>
+                </li>
+                <li>
+                    <a class="active" href="/admin">
+                        <span class="icon"><i class="fa fa-tachometer" aria-hidden="true"></i></span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/profile">
+                        <span class="icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+                        <span class="title">Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="down">
+                        <span class="icon"><i class="fa fa-comments" aria-hidden="true"></i></span>
+                        <span class="title">Feedback</span>
+                    </a>
+                    <ul>
+                        <div class="csat"><a onclick="window.location.href='/prodfeedback';">Feedback on Products</a></div>
+                        <div class="csat"><a onclick="window.location.href='/servfeedback';">Feedback on Services</a></div>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/settings">
+                        <span class="icon"><i class="fa fa-cog" aria-hidden="true"></i></span>
+                        <span class="title">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/logout">
+                        <span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        
+        <div class="main">
+            <div class="navbar">
+                <div class="toggle" onclick="toggleMenu();"> </div><h1>Dashboard</h1>
+            </div>
+            
+            <!-- Cards -->
+            <div class="cardBox">
+                <div class="card">
+                    <div>
+                        <div class="numbers">{{total_count}}</div>
+                        <div class="cardName">Total Customer Feedback</div>
+                    </div>
+                    <div class="iconBx">
+                        <span><i class="fa fa-users" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="numbers">{{start_cus}}</div>
+                        <div class="cardName">Total Starting Customers</div>
+                    </div>
+                    <div class="iconBx">
+                        <span><i class="fa fa-users" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="numbers">{{end_cus}}</div>
+                        <div class="cardName">Total Ending Customers</div>
+                    </div>
+                    <div class="iconBx">
+                        <span><i class="fa fa-users" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div>
+                        <div class="numbers">{{cus_ret}}%</div>
+                        <div class="cardName">Customer Retention Rate</div>
+                    </div>
+                    <div class="iconBx">
+                        <span><i class="fa fa-users" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+
+            </div>
+
+
+                            <div class="chart-container" style="position: relative; width: 800px; padding: 20px;">
+                                <canvas id="branch_category"></canvas>
+                            </div>
+
+
+            <div id="status" class="data">
+                <div class="col-xs-10 col-sm-6 col-md-6">
+                    <div class="card card-style mb-2">
+                        <div class="card-body">
+                            <div class="chart-container" style="position: relative; width: 800px; padding: 20px;">
+                                <canvas id="status_category"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>  
+
+            <div class="container feedback-table" style="margin-left: auto; margin-right: auto;">
+                <div class="heading">
+                    <h2 class="table-title">Kumpares Customer Feedback</h2>
+                    <form action="" method="get">
+                        <input type="text" class="form-control" name="z" placeholder="Search here..." id="myInput" onkeyup="searching()">      
+                    </form>
+                </div>
+
+            <div class="table">
+                <table id="fb-table" class="table">
+                    <thead>
+                        <tr>
+                            <th col-index = 1>Customer Name</th>
+                            <th col-index = 2>Branch
+                                <select class="table-filter" onchange="filter_rows()">
+                                    <option value="all"></option>
+                                </select>
+                            </th>
+                            <th col-index = 3>Customer Status
+                                <select class="table-filter" onchange="filter_rows()">
+                                    <option value="all"></option>
+                                </select>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody id="myTable">
+                        {% for prodservs in prodserv %}
+                        <tr>
+                            <td>{{prodservs.custname}}</td>
+                            <td>{{prodservs.branch}}</td>
+                            <td>{{prodservs.custstatus}}</td>
+                        </tr>
+                        {% endfor %}
+                                      
+                    </tbody>
+                </table>  
+                </div>
+
+        </div>
+            
+
+            <!--
+            <div class="cards">
+                <div class="image">
+                    <a href="/profile"><img src="static/assets/admin.png"></a>
+                </div>
+        
+                <div class="title">
+                    <a href="/profile" style="text-decoration: none;"><p>Admin Profile</p></a>
+                </div>
+                </div> 
+
+                <div class="cards">
+                    <div class="image">
+                        <a href="/feedback"><img src="static/assets/feedback.png"></a>
+                    </div>
+            
+                    <div class="title">
+                        <a href="/feedback" style="text-decoration: none;"><p>Customer Feedback</p></a>    
+                    </div>
+                    </div> 
+
+                    <div class="cards">
+                        <div class="image">
+                            <a href="/settings"><img src="static/assets/settings.png"></a>
+                        </div>
+                
+                        <div class="title">
+                            <a href="/settings" style="text-decoration: none;"><p>Admin Settings</p></a>
+                        </div>
+                        </div> 
+
+        </div>
+        -->
+    </div>
+    </div>
+
+    <script>
+        function toggleMenu(){
+            let toggle = document.querySelector('.toggle');
+            let navigation = document.querySelector('.navigation');
+            let main = document.querySelector('.main');
+            toggle.classList.toggle('active');
+            navigation.classList.toggle('active');
+            main.classList.toggle('active');
+
+        }
+    </script>
+
+    <!--Search Bar Filter-->
+    <script>
+        $(document).ready(function(){
+        $("#myInput").on("keyup", function(){
+            var value = $(this).val().toLowerCase();
+        $("#myTable tr").filter(function(){
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+            });
+        });
+            });
+    </script>
+
+    <script>
+    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - 
+    This allows the user to have multiple dropdowns without any conflict */
+    var dropdown = document.getElementsByClassName("down");
+    var i;
+    
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+      });
+    }
+    </script>
+    
+    <script>
+
+        let click = document.querySelector('.click');
+
+        let list = document.querySelector('.list');
+
+        click.addEventListener("click",()=>{
+
+            list.classList.toggle('newlist');
+
+        });
+
+    </script>
+
+
+<script>
+        
+    window.onload = () => {
+        console.log(document.querySelector("#fb-table > tbody > tr:nth-child(1) > td:nth-child(2) ").innerHTML);
+    };
+
+    getUniqueValuesFromColumn()
+</script>
+
+<script>
+    let branch_category_data = JSON.parse({{ branch_category | tojson}})
+    let status_category_data = JSON.parse({{ status_category | tojson}})
+
+    let branch_category_data_chart = new Chart(branch_category, {
+            type: 'bar',
+            data: {
+                labels: ['San Pedro', 'Poblacion'],
+                datasets: [{
+                    label: "Kumpares Branches",
+                    data: branch_category_data,
+            backgroundColor: ['#5DA5DA ', '#FAA43A'],
+            borderWidth: 1,
+            hoverBorderColor: "black",
+            hoverBorderWidth: 2,
+            hoverBackgroundColor: 'rgba(154, 245, 140)',
+            pointHoverRadius: 5
+        }],
+            },
+        options: {
+                title: {
+                    display: true,
+                        text: "Kumpares Branches",
+                            fontSize: 20,
+            },
+                legend: {
+                    position: "right",
+                        labels: {
+                        fontColor: "gray"
+                    },
+                    display: true,
+            },
+
+                elements: {
+                    hitRadius: 3,
+            }
+            }
+        });
+
+        let status_category_data_chart = new Chart(status_category, {
+            type: 'bar',
+            data: {
+                labels: ['New Customer', 'Old Customer'],
+                datasets: [{
+                    label: "Customer Status",
+                    data: status_category_data,
+            backgroundColor: ['#5DA5DA ', '#FAA43A'],
+            borderWidth: 1,
+            hoverBorderColor: "black",
+            hoverBorderWidth: 2,
+            hoverBackgroundColor: 'rgba(154, 245, 140)',
+            pointHoverRadius: 5
+        }],
+            },
+        options: {
+                title: {
+                    display: true,
+                        text: "Customer Status",
+                            fontSize: 20,
+            },
+                legend: {
+                    position: "right",
+                        labels: {
+                        fontColor: "gray"
+                    },
+                    display: true,
+            },
+
+                elements: {
+                    hitRadius: 3,
+            }
+            }
+        });
+</script>
+
+</body>
+</html>

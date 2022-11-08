@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="static/assets/logo.png">
+<title>Kumpares PH Admin Website</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="static/admin.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="/static/filter.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- chart.js CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.3.2/chart.min.js"
+     integrity="sha512-VCHVc5miKoln972iJPvkQrUYYq7XpxXzvqNfiul1H4aZDwGBGC0lq373KNleaB2LpnC2a/iNfE5zoRYmB4TRDQ==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js"></script>
+</head>
+
+<style>
+    .chartBox {
+        width: 600px;
+        padding: 20px;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                        <span class="title"><h3>Administrator</h3></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin">
+                        <span class="icon"><i class="fa fa-tachometer" aria-hidden="true"></i></span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a  href="/profile">
+                        <span class="icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+                        <span class="title">Profile</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a class="down">
+                        <span class="icon"><i class="fa fa-comments" aria-hidden="true"></i></span>
+                        <span class="title">Feedback</span>
+                    </a>
+                    <ul>
+                        <div class="csat"><a onclick="window.location.href='/prodfeedback';">Feedback on Products</a></div>
+                        <div class="csat"><a onclick="window.location.href='/servfeedback';">Feedback on Services</a></div>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/settings">
+                        <span class="icon"><i class="fa fa-cog" aria-hidden="true"></i></span>
+                        <span class="title">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/logout">
+                        <span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main">
+            <div class="navbar">
+                <div class="toggle" onclick="toggleMenu();"> </div><h1>Customer Feedback</h1>
+            </div>
+            
+            <div class="wrapper">
+                <div class="menu">
+                    <select id="name">
+                        <option value="empserv">Employee Service</option>
+                        <option value="speed">Speed</option>
+                        <option value="clean">Cleanliness</option>
+                    </select>
+                </div>
+
+                <div class="content">
+                    <div id="empserv" class="data">
+                        <div class="col-xs-10 col-sm-6 col-md-6">
+                            <div class="card card-style mb-2">
+                                <div class="card-body">
+                                    <div class="chart-container" style="position: relative; width: 800px; padding: 20px;">
+                                        <canvas id="empserv_category"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 class="empserv_score"> Employee Service Satisfaction Score: {{empserv_score}}%</h1><br>
+                        <h4 class="empserv_recommendation">Analysis: {{empserv_reccomendation}}</h4>
+                    </div>
+
+                    <div id="speed" class="data">
+                        <div class="col-xs-10 col-sm-6 col-md-6">
+                            <div class="card card-style mb-2">
+                                <div class="card-body">
+                                    <div class="chart-container" style="position: relative; width: 800px; padding: 20px;">
+                                        <canvas id="speed_category"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 class="speed_score"> Speed Satisfaction Score: {{speed_score}}%</h1><br>
+                        <h4 class="speed_recommendation">Analysis: {{speed_reccomendation}}</h4>
+                    </div>
+
+                    <div id="clean" class="data">
+                        <div class="col-xs-10 col-sm-6 col-md-6">
+                            <div class="card card-style mb-2">
+                                <div class="card-body">
+                                    <div class="chart-container" style="position: relative; width: 800px; padding: 20px;">
+                                        <canvas id="clean_category"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 class="clean_score"> Cleanliness Satisfaction Score: {{clean_score}}%</h1><br>
+                        <h4 class="clean_recommendation">Analysis: {{clean_reccomendation}}</h4>
+                    </div>   
+                </div>
+                
+            </div>
+            
+
+                <div class="container feedback-table" style="margin-left: auto; margin-right: auto;">
+                    <div class="heading">
+                        <h2 class="table-title">Kumpares Customer Feedback</h2>
+                        <form action="" method="get">
+                            <input type="text" class="form-control" name="z" placeholder="Search here..." id="myInput" onkeyup="searching()">      
+                        </form>
+    
+                        <div>
+                            <button onclick="window.location.href='/csatprod';">Customer Satisfaction</button>
+                        </div>
+    
+                        <div>
+                            <button onclick="window.location.href='/admin';">Customer Retention</button>
+                        </div>
+                    </div>
+    
+                <div class="table">
+                    <table id="fb-table" class="table">
+                        <thead>
+                            <tr>
+                                <th col-index = 1>Customer Name</th>
+                                <th col-index = 2>Branch
+                                    <select class="table-filter" onchange="filter_rows()">
+                                        <option value="all"></option>
+                                    </select>
+                                </th>
+                                <th col-index = 3>Employee Service
+                                    <select class="table-filter" onchange="filter_rows()">
+                                        <option value="all"></option>
+                                    </select>
+                                </th>
+                                <th col-index = 4>Speed
+                                    <select class="table-filter" onchange="filter_rows()">
+                                        <option value="all"></option>
+                                    </select>
+                                </th>
+                                <th col-index = 5>Cleanliness
+                                    <select class="table-filter" onchange="filter_rows()">
+                                        <option value="all"></option>
+                                    </select>
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="myTable">
+                            {% for servs in serv %}
+                            <tr>
+                                <td>{{servs.custname}}</td>
+                                <td>{{servs.branch}}</td>
+                                <td>{{servs.fb_empserv}}</td>
+                                <td>{{servs.fb_speed}}</td>
+                                <td>{{servs.fb_clean}}</td>
+                            </tr>
+                            {% endfor %}
+                                          
+                        </tbody>
+                    </table>  
+                    </div>
+    
+            </div>
+        </div>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#name").on('change', function(){
+                    $(".data").hide();
+                    $("#" + $(this).val()).fadeIn(700);
+                }).change();
+            });
+        </script>
+    
+        <script>
+            function toggleMenu(){
+                let toggle = document.querySelector('.toggle');
+                let navigation = document.querySelector('.navigation');
+                let main = document.querySelector('.main');
+                toggle.classList.toggle('active');
+                navigation.classList.toggle('active');
+                main.classList.toggle('active');
+    
+            }
+        </script>
+    
+                    <!--Search Bar Filter-->
+        <script>
+            $(document).ready(function(){
+            $("#myInput").on("keyup", function(){
+                var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function(){
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+                });
+            });
+                });
+        </script>
+    
+        <script>
+    
+            let click = document.querySelector('.click');
+    
+            let list = document.querySelector('.list');
+    
+            click.addEventListener("click",()=>{
+    
+                list.classList.toggle('newlist');
+    
+            });
+    
+        </script>
+    
+        <script>
+            const button1 = document.getElementById("btn1");
+            const list1 = document.getElementById("list1");
+    
+            list1.style.display = "none";
+            button1.addEventListener("click", (event) => {
+                if (list1.style.display =="none") {
+                    list1.style.display = "block";
+                } else {
+                    list1.style.display = "none";
+                }
+            });
+        </script>
+    
+        <script>
+            
+            window.onload = () => {
+                console.log(document.querySelector("#fb-table > tbody > tr:nth-child(1) > td:nth-child(2) ").innerHTML);
+            };
+    
+            getUniqueValuesFromColumn()
+        </script>
+    
+        
+    
+    <!--
+    <script>
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Positive', 'Negative'],
+                    datasets: [{
+                        label: 'Products Charts',
+                        data: [4, 6],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        
+        const coffeesales = document.getElementById('coffeesales');
+        coffeesales.addEventListener('change', salesTracker);
+        function salesTracker(){
+            const label = coffeesales.options[coffeesales.selectedIndex].text;
+            myChart.data.datasets[0].label = label;
+            myChart.data.datasets[0].data = coffeesales.value.split(',');
+            
+            myChart.update();
+        }
+        </script>
+    -->
+    
+    <script>
+        let empserv_category_data = JSON.parse({{ empserv_category | tojson}})
+        let speed_category_data = JSON.parse({{ speed_category | tojson}})
+        let clean_category_data = JSON.parse({{ clean_category | tojson}})
+        
+    /*    Chart.scaleService.updateScaleDefaults('linear', {
+                ticks: {
+                    min: 0
+                }
+        });
+    */
+    
+        let empserv_category_data_chart = new Chart(empserv_category , {
+                type: 'bar',
+                data: {
+                    labels: ['Very Unsatisfied', 'Unsatisfied', 'Neutral', 'Satisfied', 'Very Satisfied'],
+                    datasets: [{
+                        label: "Employee Service Rating",
+                        data: empserv_category_data,
+                backgroundColor: ['#5DA5DA ', '#FAA43A', '#60BD68', '#B276B2', '#E16851'],
+                borderWidth: 1,
+                hoverBorderColor: "black",
+                hoverBorderWidth: 2,
+                hoverBackgroundColor: 'rgba(154, 245, 140)',
+                pointHoverRadius: 5
+            }],
+                },
+            options: {
+                    title: {
+                        display: true,
+                            text: "Employee Service Rating",
+                                fontSize: 20,
+                },
+                    legend: {
+                        position: "right",
+                            labels: {
+                            fontColor: "gray"
+                        },
+                        display: true,
+                },
+    
+                    elements: {
+                        hitRadius: 3,
+                }
+                }
+                
+            });
+    
+            let speed_category_data_chart = new Chart(speed_category, {
+                type: 'bar',
+                data: {
+                    labels: ['Very Unsatisfied', 'Unsatisfied', 'Neutral', 'Satisfied', 'Very Satisfied'],
+                    datasets: [{
+                        label: "Speed Rating",
+                        data: speed_category_data,
+                backgroundColor: ['#5DA5DA ', '#FAA43A', '#60BD68', '#B276B2', '#E16851'],
+                borderWidth: 1,
+                hoverBorderColor: "black",
+                hoverBorderWidth: 2,
+                hoverBackgroundColor: 'rgba(154, 245, 140)',
+                pointHoverRadius: 5
+            }],
+                },
+            options: {
+                    title: {
+                        display: true,
+                            text: "Speed Rating",
+                                fontSize: 20,
+                },
+                    legend: {
+                        position: "right",
+                            labels: {
+                            fontColor: "gray"
+                        },
+                        display: true,
+                },
+    
+                    elements: {
+                        hitRadius: 3,
+                }
+                }
+            });
+    
+            let clean_category_data_chart = new Chart(clean_category, {
+                type: 'bar',
+                data: {
+                    labels: ['Very Unsatisfied', 'Unsatisfied', 'Neutral', 'Satisfied', 'Very Satisfied'],
+                    datasets: [{
+                        label: "Cleanliness Rating",
+                        data: clean_category_data,
+                backgroundColor: ['#5DA5DA ', '#FAA43A', '#60BD68', '#B276B2', '#E16851'],
+                borderWidth: 1,
+                hoverBorderColor: "black",
+                hoverBorderWidth: 2,
+                hoverBackgroundColor: 'rgba(154, 245, 140)',
+                pointHoverRadius: 5
+            }],
+                },
+            options: {
+                    title: {
+                        display: true,
+                            text: "Cleanliness Rating",
+                                fontSize: 20,
+                },
+                    legend: {
+                        position: "right",
+                            labels: {
+                            fontColor: "gray"
+                        },
+                        display: true,
+                },
+    
+                    elements: {
+                        hitRadius: 3,
+                }
+                }
+            });
+    
+    </script>
+    
+    <!--
+        <script>
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Positive', 'Negative'],
+                    datasets: [{
+                        label: 'Products Charts',
+                        data: [4, 6],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        
+        const coffeesales = document.getElementById('coffeesales');
+        coffeesales.addEventListener('change', salesTracker);
+        function salesTracker(){
+            const label = coffeesales.options[coffeesales.selectedIndex].text;
+            myChart.data.datasets[0].label = label;
+            myChart.data.datasets[0].data = coffeesales.value.split(',');
+            
+            myChart.update();
+        }
+        </script>
+    -->
+    </body>
+    </html>

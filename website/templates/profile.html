@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" href="static/assets/logo.png">
+<title>Kumpares PH Admin Website</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="static/admin.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon"><i class="fa fa-users" aria-hidden="true"></i></span>
+                        <span class="title"><h3>Administrator</h3></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/admin">
+                        <span class="icon"><i class="fa fa-tachometer" aria-hidden="true"></i></span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="active" href="/profile">
+                        <span class="icon"><i class="fa fa-user-circle-o" aria-hidden="true"></i></span>
+                        <span class="title">Profile</span>
+                    </a>
+                </li>
+                <li>
+                    <a class="down">
+                        <span class="icon"><i class="fa fa-comments" aria-hidden="true"></i></span>
+                        <span class="title">Feedback</span>
+                    </a>
+                    <ul>
+                        <div class="csat"><a onclick="window.location.href='/prodfeedback';">Feedback on Products</a></div>
+                        <div class="csat"><a onclick="window.location.href='/servfeedback';">Feedback on Services</a></div>
+                    </ul>
+                </li>
+                <li>
+                    <a href="/settings">
+                        <span class="icon"><i class="fa fa-cog" aria-hidden="true"></i></span>
+                        <span class="title">Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="/logout">
+                        <span class="icon"><i class="fa fa-sign-out" aria-hidden="true"></i></span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="main">
+            <div class="navbar">
+                <div class="toggle" onclick="toggleMenu();"></div><h1>Admin Profile</h1>
+            </div>
+
+            <div class="prof">
+                <div id="profile" class="data">
+                    <form method="POST" action="/" enctype="multipart/form-data">
+
+                        {% if current_user.filename %}
+                        
+                        <p class="pic"><img src="{{ url_for('static', filename='uploads/' + current_user.filename)}}" alt=""></p>
+                            
+                        {% else %}
+
+                        <p class="pic"><img src="{{ url_for('static', filename='uploads/default_profile_pic.png')}}" alt=""></p>
+                    
+                        {% endif %}
+                    </form>
+
+                    <p><b>Full Name</b><span>{{current_user.fullname}}</span></p>
+                    <p><b>Username</b><span>{{current_user.username}}</span></p>
+                    <p><b>Email</b><span>{{current_user.email}}</span></p>
+                    <p><b>Contact Number</b><span>{{current_user.contnum}}</span></p>
+                    <p><b>Account Date Added</b><span>{{current_user.date_added}}</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+function toggleMenu(){
+let toggle = document.querySelector('.toggle');
+let navigation = document.querySelector('.navigation');
+let main = document.querySelector('.main');
+toggle.classList.toggle('active');
+navigation.classList.toggle('active');
+main.classList.toggle('active');
+
+}
+</script>
+
+<!--Image Upload-->
+<script>
+const imgDiv = document.querySelector('.adminpicture');
+const img = document.querySelector('#photo');
+const file = document.querySelector('#file');
+const uploadBtn = document.querySelector('#uploadBtn');
+
+//hover sa profile
+imgDiv.addEventListener('mouseenter', function()
+{
+uploadBtn.style.display = "block";
+});
+
+//hover out
+imgDiv.addEventListener('mouseleave', function()
+{
+uploadBtn.style.display = "none";
+});
+
+//function to choose photo
+file.addEventListener('change', function(){
+// referring to file
+const choosedFile = this.files[0];
+
+if (choosedFile) {
+    const reader = new FileReader();
+    //yung FileReader predefined function ng JS according to google
+
+    reader.addEventListener('load', function(){
+        img.setAttribute('src', reader.result);
+    });
+
+    reader.readAsDataURL(choosedFile);
+}
+});
+</script>
+    <script>
+    /* Loop through all dropdown buttons to toggle between hiding and showing its dropdown content - 
+    This allows the user to have multiple dropdowns without any conflict */
+    var dropdown = document.getElementsByClassName("down");
+    var i;
+    
+    for (i = 0; i < dropdown.length; i++) {
+      dropdown[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var dropdownContent = this.nextElementSibling;
+        if (dropdownContent.style.display === "block") {
+          dropdownContent.style.display = "none";
+        } else {
+          dropdownContent.style.display = "block";
+        }
+      });
+    }
+    </script>
+</body>
+</html>

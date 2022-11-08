@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <link rel="icon" href="assets/logo.png">
+      <title>Kumpares PH Website</title>
+      <link rel="stylesheet" href="static/servform.css">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+      <script src="static/form.js"></script>
+
+      <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+      <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/css/bootstrap-select.min.css">
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
+   </head>
+   <body>
+
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+         messages %} {% for category, message in messages %} {% if category ==
+         'error' %}
+         <div class="alert alert-danger alter-dismissable fade show" role="alert">
+           {{ message }}
+           <button type="button" class="close" data-dismiss="alert">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         {% else %}
+         <div class="alert alert-success alter-dismissable fade show" role="alert">
+           {{ message }}
+           <button type="button" class="close" data-dismiss="alert">
+             <span aria-hidden="true">&times;</span>
+           </button>
+         </div>
+         {% endif %} {% endfor %} {% endif %} {% endwith %}
+
+         <form method="POST">  
+     <div class="container">
+        <div class="form" id="Form1">
+            <h3>Personal Information</h3>
+            <input type="text" name="custname" placeholder="Name" required>
+            <input type="text" name="custcontact" placeholder="Contact Number" required>
+            <input type="text"  name="custemail" placeholder="Email Address" required>
+       
+            <div class="btn-box">
+               <button type="button" id="Next1">Next</button>
+            </div>
+         </div>
+
+        <div class="form" id="Form2">
+         <h3>Transaction Information</h3>
+         
+         <div class="wrapper">
+            <div class="menu">
+               <br>
+               <label for="customer">Are you an old or new customer?</label>
+               <br>
+               <select name="custstatus" id="dropdown" required>
+                  <option value="" disabled selected hidden>Select Status...</option>
+                  <option value="new customer">New Customer</option>
+                  <option value="old customer">Old Customer</option>
+               </select>
+            </div>
+         </div>
+
+            <div class="wrapper">
+               <div class="menu">
+                  <br>
+                  <label for="branch">Kumpares Branch where you purchased?</label>
+                  <br>
+                  <select name="branch" id="dropdown" required>
+                     <option value="" disabled selected hidden>Select Branch...</option>
+                     <option value="San Pedro">San Pedro Branch</option>
+                     <option value="Muntinlupa">Muntinlupa Branch</option>
+                  </select>
+               </div>
+            </div>
+            <br>
+            <label for="branch">Product Purchased</label>
+            <br>
+            <div class="container3">
+         
+               <select name="prodpurchase" id="product" class="form-control selectpicker" data-live-search="true" multiple required>
+                  <option value="" disabled selected hidden>Select all purchased products...</option>
+                  <option value="Lechon Manok">Lechon Manok</option>
+                  <option value="K-POP Chicken">K-POP Chicken</option>
+                  <option value="Chinese Style Fried Chicken">Chinese Style Fried Chicken</option>
+                  <option value="Pork Liempo">Pork Liempo</option>
+                  <option value="Pork Sisig">Pork Sisig</option>
+                  <option value="Pork BBQ">Pork BBQ</option>
+                  <option value="Lechon Paksiw">Lechon Paksiw</option>
+                  <option value="Tokwa't Baboy">Tokwa't Baboy</option>
+                  <option value="Tapang Baka">Tapang Baka</option>
+                  
+               </select>
+         </div>
+
+            
+    
+         <div class="btn-box">
+            <button type="button" id="Back1">Back</button>
+            <button type="button" id="Next2">Next</button>
+         </div>
+      </div>
+
+
+  <div class="form" id="Form3">
+   <h3>Service Satisfaction Rating</h3>
+   <div class="wrapper">
+      <div class="menu">
+         <label for="branch">How satisfied are you with our staff/employees services?</label>
+         <br>
+         <select name="fb_empserv" id="dropdown" required>
+            <option value="" disabled selected hidden>Choose Rating...</option>
+            <option value="5">5 (Very Satisfied)</option>
+            <option value="4">4 (Satisfied)</option>
+            <option value="3">3 (Neutral)</option>
+            <option value="2">2 (Unsatisfied)</option>
+            <option value="1">1 (Very Unsatisfied)</option>
+         </select>
+      </div>
+   </div>
+   <div class="wrapper">
+      <div class="menu">
+         <label for="branch">How satisfied are you with the speed of our service?</label>
+         <br>
+         <select name="fb_speed" id="dropdown" required>
+            <option value="" disabled selected hidden>Choose Rating...</option>
+            <option value="5">5 (Very Satisfied)</option>
+            <option value="4">4 (Satisfied)</option>
+            <option value="3">3 (Neutral)</option>
+            <option value="2">2 (Unsatisfied)</option>
+            <option value="1">1 (Very Unsatisfied)</option>
+         </select>
+      </div>
+   </div>
+   <div class="wrapper">
+      <div class="menu">
+         <label for="branch">How satisfied are you with the cleanliness and orderliness of our store?</label>
+         <br>
+         <select name="fb_clean" id="dropdown" required>
+            <option value="" disabled selected hidden>Choose Rating...</option>
+            <option value="5">5 (Very Satisfied)</option>
+            <option value="4">4 (Satisfied)</option>
+            <option value="3">3 (Neutral)</option>
+            <option value="2">2 (Unsatisfied)</option>
+            <option value="1">1 (Very Unsatisfied)</option>
+         </select>
+      </div>
+   </div>
+
+   <div class="btn-box">
+      <button type="button" id="Back2">Back</button>
+      <button type="button" id="Next3">Next</button>
+   </div>
+</div> 
+
+<div class="form" id="Form4">
+   <h3>Service Comment and Suggestion Box:</h3>
+   <br>
+   <br>
+   <br>
+   <textarea placeholder="Type your comment about our services here..." name="servcomment" id="servcomment" cols="45" rows="5"></textarea>
+      
+   
+      <br>
+      <br>
+      
+   <div class="btn-box">
+      <button type="button" id="Back3">Back</button>
+      <button class="submitbtn" type="submit" onclick="openPopup()">Submit</button>
+   </div>
+</div> 
+
+
+      <div class="step-row">
+         <div id="progress"></div>
+
+         <div class="step-col"><small>Step 1</small></div>
+         <div class="step-col"><small>Step 2</small></div>
+         <div class="step-col"><small>Step 3</small></div>
+         <div class="step-col"><small>Step 4</small></div>
+
+      </div>
+
+      <div class="modal-bg">
+         <div class="popup" id="popup" >
+            <img src="static/assets/voucher.png" alt="tick">
+            <h2>Thank you for your feedback!</h2>
+            <p>Here's a 5% voucher for your your next purchase to our store, kindly take a screenshot and show it to our staff.</p>
+            <button class="modalclose" type="button" onclick="window.location.href='/';" >OK</button>
+
+         <!--<button class="modalclose" type="button" onclick="closePopup()">OK</button>-->
+         
+         </div>
+      </div>
+
+     </div>
+     </form>
+      
+     
+      <script>
+         var Form1 = document.getElementById("Form1");
+         var Form2 = document.getElementById("Form2");
+         var Form3 = document.getElementById("Form3");
+         var Form4 = document.getElementById("Form4");
+
+         var Next1 = document.getElementById("Next1");
+         var Next2 = document.getElementById("Next2");
+         var Next3 = document.getElementById("Next3");
+         var Back1 = document.getElementById("Back1");
+         var Back2 = document.getElementById("Back2");
+         var Back3 = document.getElementById("Back3");
+
+         var progress = document.getElementById("progress");
+
+         Next1.onclick = function() {
+            Form1.style.left = "-450px";
+            Form2.style.left = "40px"; 
+            progress.style.width = "190px";
+         }
+
+         Back1.onclick = function() {
+            Form1.style.left = "40px";
+            Form2.style.left = "450px"; 
+            progress.style.width = "90px";
+         }
+
+         Next2.onclick = function() {
+            Form2.style.left = "-450px";
+            Form3.style.left = "40px"; 
+            progress.style.width = "290px";
+         }
+
+         Back2.onclick = function() {
+            Form2.style.left = "40px";
+            Form3.style.left = "450px"; 
+            progress.style.width = "190px";
+         }
+
+         Next3.onclick = function() {
+            Form3.style.left = "-450px";
+            Form4.style.left = "40px"; 
+            progress.style.width = "400px";
+         }
+
+         Back3.onclick = function() {
+            Form3.style.left = "40px";
+            Form4.style.left = "450px"; 
+            progress.style.width = "290px";
+         }
+         
+         $(document).ready(function(){
+            $('.selectpicker').selectpicker();
+            
+            $('#skills').change(function(){
+             $('#hidden_skills').val($('#skills').val());
+            });
+            
+            $('#multiple_select_form').on('submit', function(event){
+             event.preventDefault();
+             if($('#skills').val() != '')
+             {
+              var form_data = $(this).serialize();
+              $.ajax({
+               url:"/ajax_add",
+               method:"POST",
+               data:form_data,
+               success:function(data)
+               {
+                //console.log(data);
+                $('#hidden_skills').val('');
+                $('.selectpicker').selectpicker('val', '');
+                alert(data);
+               }
+              })
+             }
+             else
+             {
+              alert("Please select framework");
+              return false;
+             }
+            });
+           });
+
+             /* Popup JS */
+
+         var submitBtn = document.querySelector('.submitbtn');
+           var modalBg = document.querySelector('.modal-bg');
+           var modalClose = document.querySelector('.modalclose');
+
+           submitBtn.addEventListener('click', function(){
+               modalBg.classList.add("open-popup");
+           });
+
+           modalClose.addEventListener('click', function(){
+               modalBg.classList.remove("open-popup");
+           });
+
+
+      </script>
+
+      
+      
+   </body>
+</html>

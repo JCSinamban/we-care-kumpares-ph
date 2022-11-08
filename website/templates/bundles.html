@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale-1">
+    <link rel="icon" href="static/assets/logo.png">
+    <title>Kumpares PH Website</title>
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudfare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <link href="static/index.css" rel="stylesheet">
+</head>
+<body>
+
+<!--Navigation-->
+<section id="home">
+<div class="header"> 
+    <div class="menu-bar">
+        <nav class="navbar navbar-expand-sm navbar-light">
+            <a class="navbar-brand" href="/"><img src="static/assets/logo.png"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <i class="fa fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="/">Home</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/#aboutus">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/#promotions">Promotions</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/#location">Location</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/#contactus">Contact Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="/login"><img src="static/assets/login.png"></a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+    </div>
+</div>
+</section>
+
+<div class="textheader2">
+    <p>Kumpares Bundles</p>
+</div>
+
+<div class="container1">
+    <div class="mySlides">
+      <div class="numbertext">1 / 6</div>
+      <img src="static/food/b1.png" style="width:100%">
+    </div>
+  
+    <div class="mySlides">
+      <div class="numbertext">2 / 6</div>
+      <img src="static/food/b2.png" style="width:100%">
+    </div>
+  
+    <div class="mySlides">
+      <div class="numbertext">3 / 6</div>
+      <img src="static/food/b3.png" style="width:100%">
+    </div>
+      
+    <div class="mySlides">
+      <div class="numbertext">4 / 6</div>
+      <img src="static/food/b4.png" style="width:100%">
+    </div>
+  
+    <div class="mySlides">
+      <div class="numbertext">5 / 6</div>
+      <img src="static/food/b5.png" style="width:100%">
+    </div>
+      
+    <div class="mySlides">
+      <div class="numbertext">6 / 6</div>
+      <img src="static/food/b6.png" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+      <div class="numbertext">7 / 11</div>
+      <img src="static/food/b7.png" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+      <div class="numbertext">8 / 11</div>
+      <img src="static/food/b8.png" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+      <div class="numbertext">9 / 11</div>
+      <img src="static/food/b9.png" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+      <div class="numbertext">10 / 11</div>
+      <img src="static/food/b10.png" style="width:100%">
+    </div>
+
+    <div class="mySlides">
+      <div class="numbertext">11 / 11</div>
+      <img src="static/food/b11.png" style="width:100%">
+    </div>
+
+    <a class="prev" onclick="plusSlides(-1)">❮</a>
+    <a class="next" onclick="plusSlides(1)">❯</a>
+  
+    <div class="caption-container">
+      <p id="caption"></p>
+    </div>
+  </div>
+
+  <script>
+    let slideIndex = 1;
+    showSlides(slideIndex);
+    
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+    
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+    
+    function showSlides(n) {
+      let i;
+      let slides = document.getElementsByClassName("mySlides");
+      let dots = document.getElementsByClassName("demo");
+      let captionText = document.getElementById("caption");
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+        dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";
+      dots[slideIndex-1].className += " active";
+      captionText.innerHTML = dots[slideIndex-1].alt;
+    }
+  </script>
+  
+  <script>
+    var myIndex = 0;
+    carousel();
+
+    function carousel() {
+    var i;
+    var x = document.getElementsByClassName("mySlides");
+    for (i = 0; i < x.length; i++) {
+    x[i].style.display = "none";  
+   }
+    myIndex++;
+    if (myIndex > x.length) {myIndex = 1}    
+    x[myIndex-1].style.display = "block";  
+    setTimeout(carousel, 3000); // Change image every 2 seconds
+}
+  </script>
+  
+
+<!--Footer-->
+<footer>
+  <div class="container-fluid padding">
+  <div class="row text-center">
+    <div class="col-md-4">
+      <!--<img src="assets/footer.png" style="width: 180px">-->
+      <div class="footercontainer">
+      <div class="footerlogo">
+        <img src="static/assets/logo.png" style="width: 60px">
+        <h4>Kumpares PH</h4>
+      </div>
+      </div>
+    
+      <hr class="light">
+      <p>Franchise Business Owner:</p>
+      <p>Mr. Michael B. Rayco</p>
+      <p>Kumpares PH Branches:</p>
+      <p>Poblacion and San Pedro</p>
+    </div>
+  
+  
+    <div class="col-md-4">
+      <hr class="light">
+      <h5>Poblacion Branch</h5>
+      <hr class="light">
+      <div class="container-fluid footercont">
+        <span><i class="fas fa-map-marker-alt"></i></span>
+        <p>#45 Katihan St., Poblacion, Muntinlupa City</p>
+      </div>
+  
+      <div class="container-fluid footercont">
+        <span><i class="fas fa-clock"></i></span>
+        <p>24 Hours (Monday-Sunday)</p>
+      </div>
+      
+      <div class="container-fluid footercont">
+        <span><i class="fas fa-phone-square-alt"></i></span>
+        <p>+63 91-518-3252</p>
+      </div>
+  
+      <div class="container-fluid footercont">
+        <span><i class="fas fa-phone-square-alt"></i></span>
+        <p>(02) 8236-3024</p>
+      </div>
+  
+    </div>
+  
+    <div class="col-md-4">
+        <hr class="light">
+        <h5>Sanjos Branch</h5>
+        <hr class="light">
+        <div class="container-fluid footercont">
+          <span><i class="fas fa-map-marker-alt"></i></span>
+          <p>Sanjos Market, Langgam, San Pedro, Laguna</p>
+        </div>
+    
+        <div class="container-fluid footercont">
+          <span><i class="fas fa-clock"></i></span>
+          <p>8:00 AM - 8:00 PM (Monday-Sunday)</p>
+        </div>
+        
+        <div class="container-fluid footercont">
+          <span><i class="fas fa-phone-square-alt"></i></span>
+          <p>+63 91-518-3253</p>
+        </div>
+    
+        <div class="container-fluid footercont">
+          <span><i class="fas fa-phone-square-alt"></i></span>
+          <p>(02) 8236-3024</p>
+        </div>
+    </div>
+  
+    <div class="col-12">
+      <hr class="light-100">
+      <h5>&copy; Kumpares PH</h5>
+    </div>
+  
+  </div>
+  
+  </div>
+  </footer>
+</body>
+</html>
