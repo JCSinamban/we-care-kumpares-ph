@@ -706,8 +706,8 @@ def admin():
                            start_cus=start_cus,
                            end_cus=end_cus,
                            cus_ret = cus_ret,
-                           branch_category = branch_category,
-                           status_category = status_category,
+                           branch_category=json.dumps(branch_category),
+                           status_category=json.dumps(status_category),
                            prodserv = prodserv, user=current_user)
 
 @views.route('/profile')
@@ -831,7 +831,7 @@ def delete(id):
         if prod:
             db.session.delete(prod)
             db.session.commit()
-            return redirect(url_for('auth.prodfeedback'))
+            return redirect('/feedback')
 
     return render_template("deleteFeedback.html", prod = prod)
 
@@ -869,7 +869,7 @@ def deletes(id):
         if prod:
             db.session.delete(serv)
             db.session.commit()
-            return redirect(url_for('auth.settings'))
+            return redirect('/servfeedback')
 
     return render_template("deleteFeedbackS.html", serv = serv)
     

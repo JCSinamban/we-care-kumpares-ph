@@ -727,95 +727,19 @@ img {
     margin: 0 auto;
 }
 
-/* percentage */
-/*
-.skill{
-    width: 160px;
-    height: 160px;
-    position: relative;
-}
-.outer{
-    height: 160px;
-    width: 160px;
-    border-radius: 50%;
-    padding: 20px;
-    box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.15),
-                -6px -6px 10px -1px rgba(255,255,255,0.7)
-}
-.inner{
-    height: 120px;
-    width: 120px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    box-shadow: inset 4px 4px 6px -1px rgba(0,0,0,0.2),
-                inset -4px -4px 6px -1px rgba(255,255,255,0.7),
-                -0.5px -0.5px 0px rgba(255,255,255,1),
-                0.5px 0.5px 0px rgba(0,0,0,0.15),
-                0px 12px 10px -10px rgba(0,0,0,0.05);
-}
-#number{
-    font-weight: 600;
-    color: #555;
-}
-circle{
-    fill: none;
-    stroke: cornflowerblue;
-    stroke-width: 20px;
-    stroke-dasharray: 472;
-    stroke-dashoffset: 472;
-    animation: anim 2s linear forwards;
-}
-svg{
-    position: absolute;
-    top: 0;
-    left: 0;
-}
-
-@keyframes anim{
-    100%{
-        stroke-dashoffset: 165;
-    }
-}
-*/
-/* circular progress bar */
-.circular {
-    height: 400px;
-    width: 400px;
-    background-color: #ffffff;
-    position: absolute;
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
+/* Dropdown */
+#name{
+    width: 100%;
+    padding: 15px;
+    font-size: 16px;
+    font-weight: 700;
+    border: none;
     border-radius: 8px;
-    box-shadow: 20px 20px 40px rgba(60, 60, 150, 0.25);
-    display: grid;
-    place-items: center;
-  }
-  .circular-progress {
-    position: relative;
-    height: 250px;
-    width: 250px;
-    border-radius: 50%;
-    display: grid;
-    place-items: center;
-  }
-  .circular-progress:before {
-    content: "";
-    position: absolute;
-    height: 84%;
-    width: 84%;
-    background-color: #ffffff;
-    border-radius: 50%;
-  }
-  .value-container {
-    position: relative;
-    font-family: "Poppins", sans-serif;
-    font-size: 50px;
-    color: #231c3d;
-  }
+    border: 2px solid #BF360C;
+    box-shadow: 0 0 15px #efefef;
+    margin-bottom: 20px;
+    background: #fdfde7;
+}
   
   /* Dashboard */
 .cardBox{
@@ -865,3 +789,27 @@ svg{
 .cardBox .card:hover .iconBx{
     color: #ffbf00;
 }
+
+/* Charts */
+.card-body {
+    position: relative;
+    width: 100%;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: repeat(2,1fr);
+    grid-gap: 30px;
+}
+
+.card-body .chart-container{
+    position: relative;
+    border-radius: 10px;
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+    width: 650px;
+    padding: 10px;
+    border-radius: 10px;
+    border: solid 2px #BF360C;
+    background: #fdfde7;
+}
+
